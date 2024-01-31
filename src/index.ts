@@ -4,8 +4,13 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import compression from 'compression';
 import cors from 'cors';
+import mongoose from 'mongoose';
 
-const PORT = process.env.PORT || 8080;
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
+
+const PORT = process.env.PORT || 1337;
 
 const app = express();
 
@@ -21,4 +26,10 @@ const server = http.createServer(app);
 
 server.listen(PORT, () => {
   console.log(`Server is running on: http://localhost:${PORT}/`);
+});
+
+mongoose.Promise = Promise;
+mongoose.connect(process.env.MONGODB_URI);
+mongoose.connection.on('error', (error: Error) => {
+  console.error(error);
 });
