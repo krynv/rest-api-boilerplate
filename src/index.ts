@@ -11,7 +11,7 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
-const PORT = process.env.PORT || 1337;
+const PORT = process.env.API_PORT || 1337;
 
 const app = express();
 
@@ -30,9 +30,8 @@ server.listen(PORT, () => {
 });
 
 mongoose.Promise = Promise;
-mongoose.connect(process.env.MONGODB_URL);
-mongoose.connection.on('error', (error: Error) => {
-  console.error(error);
-});
+mongoose.connect(process.env.MONGODB_URL)
+  .then(() => console.log('MongoDB Connected'))
+  .catch(err => console.error('MongoDB connection error:', err));
 
 app.use('/', router());
