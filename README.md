@@ -19,6 +19,28 @@ npm i && npm run dev
 Access at:
 http://localhost:1337/
 
+You will need an `.env` file:
+```
+API_PORT=1337
+
+MONGODB_URL=mongodb://mongoadmin:mongopassword@localhost:27017/mydatabase?authSource=admin
+MONGO_INITDB_ROOT_USERNAME=mongoadmin
+MONGO_INITDB_ROOT_PASSWORD=mongopassword
+
+AUTH_SECRET=secret
+```
+
+The `.env.prod` should look like this (note the difference in the connection string because MongoDB should be on the same 'network' as the API):
+```
+API_PORT=8080
+
+MONGODB_URL=mongodb://mongoadmin:mongopassword@mongo:27017/mydatabase?authSource=admin
+MONGO_INITDB_ROOT_USERNAME=mongoadmin
+MONGO_INITDB_ROOT_PASSWORD=mongopassword
+
+AUTH_SECRET=secret
+```
+
 ## Available routes:
 ### POST - /auth/register
 
