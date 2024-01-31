@@ -9,6 +9,7 @@ services:
     environment:
       NODE_ENV: production
       PORT: ${API_PORT}
+      AUTH_SECRET: ${AUTH_SECRET}
       MONGODB_URI: ${MONGODB_URI}
     depends_on:
       - mongo
